@@ -4,12 +4,14 @@ import { ChevronRight, GamepadIcon, Clock, Trophy, Sparkles, Gamepad2, MonitorPl
 import { QRCodeSVG } from 'qrcode.react';
 
 import LocationOverlay from './components/LocationOverlay';
+import PreRegistrationForm from './components/PreRegistrationForm';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
 
   const [isLocationOverlayOpen, setIsLocationOverlayOpen] = useState(false);
+  const [isPreRegisterOpen, setIsPreRegisterOpen] = useState(false);
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
@@ -105,13 +107,13 @@ function App() {
               Consoles
             </motion.a>
              */}
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#00FF00] text-black font-bold px-6 py-2 rounded-full transition-all hover:shadow-[0_0_20px_rgba(0,255,0,0.3)]"
             >
               Pre Register Cafe
-            </motion.button>
+            </motion.button> */}
           </div>
         </div>
       </motion.nav>
@@ -172,14 +174,16 @@ function App() {
               variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
+              
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#00FF00] text-black font-bold px-8 py-4 rounded-full flex items-center space-x-2 transition-all hover:shadow-[0_0_30px_rgba(0,255,0,0.3)]"
+                onClick={() => setIsPreRegisterOpen(true)}
+                className="bg-[#00FF00] text-black font-bold px-6 py-2 rounded-full transition-all hover:shadow-[0_0_20px_rgba(0,255,0,0.3)]"
               >
-                <span>Pre Book Your Slot</span>
-                <ChevronRight className="w-5 h-5" />
+                Pre Register
               </motion.button>
+
               <motion.button
                 whileHover={{ scale: 1.05, borderColor: "#00FF00" }}
                 whileTap={{ scale: 0.95 }}
@@ -188,6 +192,11 @@ function App() {
               >
                 View Locations
               </motion.button>
+
+              <PreRegistrationForm
+                isOpen={isPreRegisterOpen}
+                onClose={() => setIsPreRegisterOpen(false)}
+              />
 
               <LocationOverlay
                 isOpen={isLocationOverlayOpen}
@@ -217,34 +226,6 @@ function App() {
           </motion.div>
         </motion.div>
 
-        {/* New Gaming Images Grid */}
-        {/* <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex-1 grid grid-cols-2 gap-4 p-4"
-            >
-              {gamingImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  whileHover="hover"
-                  custom={index}
-                  className="relative overflow-hidden rounded-2xl border border-[#00FF00]/10"
-                >
-                  <motion.img
-                    src={image.url}
-                    alt={image.title}
-                    className="w-full h-48 object-cover"
-                    variants={imageVariants}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-sm font-medium text-[#00FF00]">{image.title}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div> */}
       </div>
 
       {/* Features Section */}
@@ -321,22 +302,27 @@ function App() {
           >
             Available Consoles
           </motion.h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
             {[
               {
                 name: "PlayStation 5",
                 image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80",
-                price: "₹299/hour"
+                price: "₹100/hour"
               },
               {
                 name: "Xbox Series X",
                 image: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&q=80",
-                price: "₹299/hour"
+                price: "₹100/hour"
               },
               {
                 name: "Nintendo Switch",
                 image: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&q=80",
-                price: "₹199/hour"
+                price: "₹100/hour"
+              },
+              {
+                name: "Computer",
+                image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?q=80&w=2940?auto=format&fit=crop&q=80",
+                price: "₹100/hour"
               }
             ].map((console, index) => (
               <motion.div
@@ -360,7 +346,7 @@ function App() {
                     whileTap={{ scale: 0.95 }}
                     className="w-full bg-[#00FF00] text-black font-bold py-3 rounded-full transition-all"
                   >
-                    Book Now
+                    Available Soon
                   </motion.button>
                 </div>
               </motion.div>
@@ -407,7 +393,7 @@ function App() {
                     className="w-full bg-[#00FF00] text-black font-bold px-8 py-4 rounded-full flex items-center justify-center space-x-2"
                   >
                     <Download className="w-5 h-5" />
-                    <span>Download for Android</span>
+                    <span>Soon Avalaible for Android</span>
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -415,7 +401,7 @@ function App() {
                     className="w-full bg-white/10 backdrop-blur-md border border-[#00FF00]/20 font-bold px-8 py-4 rounded-full flex items-center justify-center space-x-2"
                   >
                     <Download className="w-5 h-5" />
-                    <span>Download for iOS</span>
+                    <span>Soon Avalaible for iOS</span>
                   </motion.button>
                 </div>
               </div>
@@ -472,13 +458,6 @@ function App() {
             <p className="text-xl text-gray-300 mb-12">
               Get exclusive access to premium gaming stations, tournaments, and a vibrant community of gamers.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#00FF00] text-black font-bold px-12 py-4 rounded-full transition-all hover:shadow-[0_0_30px_rgba(0,255,0,0.3)]"
-            >
-              Book Your First Session
-            </motion.button>
           </motion.div>
         </div>
       </motion.div>
