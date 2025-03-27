@@ -36,3 +36,18 @@ html {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+.leaflet-container {
+  background-color: #1a1a1a;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.leaflet-popup-tip {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 255, 0, 0.2);
+}

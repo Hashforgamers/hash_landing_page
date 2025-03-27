@@ -3,9 +3,13 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronRight, GamepadIcon, Clock, Trophy, Sparkles, Gamepad2, MonitorPlay, Users2, Download, Smartphone } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 
+import LocationOverlay from './components/LocationOverlay';
+
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
+
+  const [isLocationOverlayOpen, setIsLocationOverlayOpen] = useState(false);
 
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
@@ -38,6 +42,35 @@ function App() {
     }
   };
 
+
+  const imageVariants = {
+    hover: {
+      scale: 1.05,
+      borderColor: "#00FF00",
+      boxShadow: "0 0 20px rgba(0, 255, 0, 0.3)",
+    }
+  };
+
+  const gamingImages = [
+    {
+      url: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&q=80",
+      title: "RGB Setup"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1603481546239-65e13c5f0f38?auto=format&fit=crop&q=80",
+      title: "Gaming Gear"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1592155931584-901ac15763e3?auto=format&fit=crop&q=80",
+      title: "Pro Gaming"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80",
+      title: "Esports"
+    }
+  ];
+
+
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Progress Bar */}
@@ -61,36 +94,23 @@ function App() {
             className="flex items-center space-x-2"
           >
             <GamepadIcon className="w-8 h-8 text-[#00FF00]" />
-            <span className="text-xl font-bold">Hash Gaming</span>
+            <span className="text-xl font-bold">Hash</span>
           </motion.div>
           <div className="hidden md:flex items-center space-x-8">
-            <motion.a
-              whileHover={{ scale: 1.1, color: "#00FF00" }}
-              href="#locations"
-              className="transition-colors"
-            >
-              Locations
-            </motion.a>
-            <motion.a
+            {/* <motion.a
               whileHover={{ scale: 1.1, color: "#00FF00" }}
               href="#consoles"
               className="transition-colors"
             >
               Consoles
             </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, color: "#00FF00" }}
-              href="#tournaments"
-              className="transition-colors"
-            >
-              Tournaments
-            </motion.a>
+             */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#00FF00] text-black font-bold px-6 py-2 rounded-full transition-all hover:shadow-[0_0_20px_rgba(0,255,0,0.3)]"
             >
-              Book Now
+              Pre Register Cafe
             </motion.button>
           </div>
         </div>
@@ -106,7 +126,7 @@ function App() {
             className="w-full h-full object-cover opacity-50"
             style={{ filter: 'brightness(0.4)' }}
           >
-            <source src="https://cdn.coverr.co/videos/coverr-playing-video-games-in-a-gaming-room-5244/1080p.mp4" type="video/mp4" />
+            <source src="/videos/coverr-man-and-woman-playing-video-games-3055-1080p.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
         </div>
@@ -125,7 +145,7 @@ function App() {
               className="flex items-center space-x-2 mb-4"
             >
               <span className="bg-[#00FF00] text-black px-4 py-1 rounded-full text-sm font-bold animate-pulse">
-                Now Live
+                Live Soon
               </span>
             </motion.div>
             <motion.h1
@@ -157,16 +177,22 @@ function App() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-[#00FF00] text-black font-bold px-8 py-4 rounded-full flex items-center space-x-2 transition-all hover:shadow-[0_0_30px_rgba(0,255,0,0.3)]"
               >
-                <span>Book Your Slot</span>
+                <span>Pre Book Your Slot</span>
                 <ChevronRight className="w-5 h-5" />
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05, borderColor: "#00FF00" }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setIsLocationOverlayOpen(true)}
                 className="border border-[#00FF00]/20 px-8 py-4 rounded-full transition-all hover:shadow-[0_0_30px_rgba(0,255,0,0.15)] backdrop-blur-sm"
               >
                 View Locations
               </motion.button>
+
+              <LocationOverlay
+                isOpen={isLocationOverlayOpen}
+                onClose={() => setIsLocationOverlayOpen(false)}
+              />
             </motion.div>
             <motion.div
               variants={containerVariants}
@@ -190,6 +216,35 @@ function App() {
             </motion.div>
           </motion.div>
         </motion.div>
+
+        {/* New Gaming Images Grid */}
+        {/* <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex-1 grid grid-cols-2 gap-4 p-4"
+            >
+              {gamingImages.map((image, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover="hover"
+                  custom={index}
+                  className="relative overflow-hidden rounded-2xl border border-[#00FF00]/10"
+                >
+                  <motion.img
+                    src={image.url}
+                    alt={image.title}
+                    className="w-full h-48 object-cover"
+                    variants={imageVariants}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="text-sm font-medium text-[#00FF00]">{image.title}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div> */}
       </div>
 
       {/* Features Section */}
