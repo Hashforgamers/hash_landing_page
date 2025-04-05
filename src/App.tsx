@@ -59,33 +59,41 @@ function App() {
 
       {/* Navbar */}
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100 }}
-        className={`fixed w-full z-40 transition-all duration-300 ${
-          scrolled ? 'bg-dark/90 backdrop-blur-md border-b border-primary/20' : 'bg-transparent'
-        }`}
-      >
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Logo />
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,0,0,0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsPreRegisterOpen(true)}
-            className="bg-gradient-to-r from-primary to-accent text-white font-bold px-6 py-2 rounded-full"
-          >
-            Pre Register
-          </motion.button>
-        </div>
-      </motion.nav>
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 100 }}
+          className={`fixed w-full z-40 transition-all duration-300 ${
+            scrolled ? 'backdrop-blur-md border-b border-primary/20' : 'bg-transparent'
+          }`}
+        >
+          <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+            <Logo />
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,0,0,0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsPreRegisterOpen(true)}
+              className="bg-gradient-to-r from-primary to-accent text-white font-bold px-6 py-2 rounded-full"
+            >
+              Pre Register
+            </motion.button>
+          </div>
+        </motion.nav>
 
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center bg-black">
+      <div className="relative min-h-screen flex items-center bg-black pt-24 md:pt-0"> {/* Add pt-24 for mobile */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-black to-black" />
         <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex-1">
-
-          <motion.div
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent"
+          >
+              Conquer the Throne. Rule the Game
+            </motion.h1>
+            
+            <motion.div
             variants={itemVariants}
             className="flex items-center space-x-2 mb-4"
           >
@@ -94,16 +102,7 @@ function App() {
               Live Soon
             </span>
           </motion.div>
-
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent"
-            >
-              Conquer the Throne. Rule the Game
-            </motion.h1>
+          
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -112,6 +111,7 @@ function App() {
             >
               Book Pro-Level Consoles. Crush Lobbies. Win Tournaments. This is Where Real Gamers Play.
             </motion.p>
+
 
 
             <div className="flex space-x-4">
