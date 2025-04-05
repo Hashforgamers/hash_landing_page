@@ -76,9 +76,9 @@ export default function LocationOverlay({ isOpen, onClose }: LocationOverlayProp
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-black/80 rounded-2xl w-full max-w-6xl overflow-hidden border border-[#00FF00]/20"
+            className="bg-black/80 rounded-2xl w-full max-w-6xl overflow-hidden border border-[#FF0000]/20"
           >
-            <div className="p-6 flex justify-between items-center border-b border-[#00FF00]/20">
+            <div className="p-6 flex justify-between items-center border-b border-[#FF0000]/20">
               <h2 className="text-2xl font-bold text-white">Our Gaming Locations</h2>
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -99,7 +99,7 @@ export default function LocationOverlay({ isOpen, onClose }: LocationOverlayProp
                       whileHover={{ scale: 1.02 }}
                       className={`p-4 rounded-xl cursor-pointer transition-all ${
                         selectedLocation === location.id
-                          ? 'bg-[#00FF00]/20 border-[#00FF00]'
+                          ? 'bg-[#FF0000]/20 border-[#FF0000]'
                           : 'bg-white/5 border-transparent'
                       } border`}
                       onClick={() => handleLocationSelect(location)}
@@ -110,7 +110,7 @@ export default function LocationOverlay({ isOpen, onClose }: LocationOverlayProp
                         {location.features.map((feature, index) => (
                           <span
                             key={index}
-                            className="text-xs px-2 py-1 rounded-full bg-[#00FF00]/10 text-[#00FF00]"
+                            className="text-xs px-2 py-1 rounded-full bg-[#FF0000]/10 text-[#FF0000]"
                           >
                             {feature}
                           </span>

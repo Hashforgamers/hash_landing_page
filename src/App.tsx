@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , Suspense} from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronRight, GamepadIcon, Clock, Trophy, Sparkles, Gamepad2, MonitorPlay, Users2, Download, Smartphone } from 'lucide-react';
+import { ChevronRight, GamepadIcon, Clock, Trophy, Sparkles, Gamepad, MonitorPlay, Users2, Download, Smartphone, MapPin, CalendarClock, BadgePercent, Award, Gift, Crown, MessageCircle , Users} from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
+import { Dot } from 'lucide-react';
 
 import LocationOverlay from './components/LocationOverlay';
 import PreRegistrationForm from './components/PreRegistrationForm';
+import  {GamingSetup}  from './components/GamingSetup'
+import { Logo } from './components/Logo';
+import { Canvas } from '@react-three/fiber';
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,7 +17,7 @@ function App() {
   const [isLocationOverlayOpen, setIsLocationOverlayOpen] = useState(false);
   const [isPreRegisterOpen, setIsPreRegisterOpen] = useState(false);
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
 
   useEffect(() => {
@@ -25,7 +29,7 @@ function App() {
   }, []);
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 1, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -44,40 +48,12 @@ function App() {
     }
   };
 
-
-  const imageVariants = {
-    hover: {
-      scale: 1.05,
-      borderColor: "#00FF00",
-      boxShadow: "0 0 20px rgba(0, 255, 0, 0.3)",
-    }
-  };
-
-  const gamingImages = [
-    {
-      url: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&q=80",
-      title: "RGB Setup"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1603481546239-65e13c5f0f38?auto=format&fit=crop&q=80",
-      title: "Gaming Gear"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1592155931584-901ac15763e3?auto=format&fit=crop&q=80",
-      title: "Pro Gaming"
-    },
-    {
-      url: "https://images.unsplash.com/photo-1600861194942-f883de0dfe96?auto=format&fit=crop&q=80",
-      title: "Esports"
-    }
-  ];
-
-
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-[#00FF00] origin-left z-50"
+
+ {/* Progress Bar */}
+    <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-secondary origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
 
@@ -87,129 +63,98 @@ function App() {
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
         className={`fixed w-full z-40 transition-all duration-300 ${
-          scrolled ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'
+          scrolled ? 'bg-dark/90 backdrop-blur-md border-b border-primary/20' : 'bg-transparent'
         }`}
       >
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2"
+          <Logo />
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,0,0,0.5)' }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsPreRegisterOpen(true)}
+            className="bg-gradient-to-r from-primary to-accent text-white font-bold px-6 py-2 rounded-full"
           >
-            <GamepadIcon className="w-8 h-8 text-[#00FF00]" />
-            <span className="text-xl font-bold">Hash</span>
-          </motion.div>
-          <div className="hidden md:flex items-center space-x-8">
-            {/* <motion.a
-              whileHover={{ scale: 1.1, color: "#00FF00" }}
-              href="#consoles"
-              className="transition-colors"
-            >
-              Consoles
-            </motion.a>
-             */}
-            {/* <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#00FF00] text-black font-bold px-6 py-2 rounded-full transition-all hover:shadow-[0_0_20px_rgba(0,255,0,0.3)]"
-            >
-              Pre Register Cafe
-            </motion.button> */}
-          </div>
+            Pre Register
+          </motion.button>
         </div>
       </motion.nav>
 
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center">
-        <div className="absolute inset-0 z-0">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            className="w-full h-full object-cover opacity-50"
-            style={{ filter: 'brightness(0.4)' }}
-          >
-            <source src="/videos/coverr-man-and-woman-playing-video-games-3055-1080p.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
-        </div>
-        <motion.div
-          style={{ opacity, scale }}
-          className="container mx-auto px-6 relative z-20"
-        >
+      <div className="relative min-h-screen flex items-center bg-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-black to-black" />
+        <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="flex-1">
+
           <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
-            className="max-w-3xl"
+            variants={itemVariants}
+            className="flex items-center space-x-2 mb-4"
           >
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center space-x-2 mb-4"
-            >
-              <span className="bg-[#00FF00] text-black px-4 py-1 rounded-full text-sm font-bold animate-pulse">
-                Live Soon
-              </span>
-            </motion.div>
+            <span className="flex items-center gap-2  text-white mb-8 px-2 py-1 rounded-full text-sm font-bold animate-pulse border border-[#DE3A3A]/20 px-8 py-3 rounded-full transition-all shadow-[0_0_30px_rgba(255,0,0,0.5)]">
+              <span className="w-3 h-3 rounded-full border-2 border-[#DE3A3A]" />
+              Live Soon
+            </span>
+          </motion.div>
+
+
             <motion.h1
-              variants={itemVariants}
-              className="text-7xl font-bold mb-6 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent"
             >
-              Level Up Your{" "}
-              <motion.span
-                whileHover={{ scale: 1.1 }}
-                className="text-[#00FF00] inline-block"
-              >
-                Gaming
-              </motion.span>{" "}
-              Experience
+              Conquer the Throne. Rule the Game
             </motion.h1>
             <motion.p
-              variants={itemVariants}
-              className="text-xl text-gray-300 mb-8 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-xl text-gray-300 mb-8"
             >
-              Book premium gaming consoles by the hour. Experience next-gen gaming with 
-              our high-end setups, competitive tournaments, and vibrant community.
+              Book Pro-Level Consoles. Crush Lobbies. Win Tournaments. This is Where Real Gamers Play.
             </motion.p>
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-4"
-            >
-              
+
+
+            <div className="flex space-x-4">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: '0 0 30px rgba(255,0,0,0.5)',
+                }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsPreRegisterOpen(true)}
-                className="bg-[#00FF00] text-black font-bold px-6 py-2 rounded-full transition-all hover:shadow-[0_0_20px_rgba(0,255,0,0.3)]"
+                className="bg-gradient-to-r from-primary to-accent text-white font-bold px-8 py-3 rounded-full text-lg flex items-center group"
               >
-                Pre Register
+                Pre Register Now
+                <ChevronRight className="ml-2 transition-transform group-hover:translate-x-1" />
               </motion.button>
 
               <motion.button
-                whileHover={{ scale: 1.05, borderColor: "#00FF00" }}
+                whileHover={{ scale: 1.05, borderColor: "#FF0000" }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsLocationOverlayOpen(true)}
-                className="border border-[#00FF00]/20 px-8 py-4 rounded-full transition-all hover:shadow-[0_0_30px_rgba(0,255,0,0.15)] backdrop-blur-sm"
+                className="border border-[#DE3A3A]/20 px-8 py-3 rounded-full transition-all hover:shadow-[0_0_30px_rgba(255,0,0,0.5)] backdrop-blur-sm flex items-center"
               >
                 View Locations
+                <ChevronRight className="ml-2 transition-transform group-hover:translate-x-1" />
               </motion.button>
+            </div>
 
-              <PreRegistrationForm
-                isOpen={isPreRegisterOpen}
-                onClose={() => setIsPreRegisterOpen(false)}
-              />
-
-              <LocationOverlay
-                isOpen={isLocationOverlayOpen}
-                onClose={() => setIsLocationOverlayOpen(false)}
-              />
-            </motion.div>
             <motion.div
               variants={containerVariants}
-              className="mt-12 grid grid-cols-3 gap-8 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-12 grid grid-cols-3 gap-8 max-w-2xl "
             >
               {[
                 { number: "20+", label: "Gaming Stations" },
-                { number: "5000+", label: "Active Gamers" },
+                { number: "5K+", label: "Active Gamers" },
                 { number: "24/7", label: "Available" }
               ].map((stat, index) => (
                 <motion.div
@@ -218,142 +163,151 @@ function App() {
                   whileHover={{ scale: 1.1 }}
                   className="text-center"
                 >
-                  <h3 className="text-4xl font-bold text-[#00FF00]">{stat.number}</h3>
-                  <p className="text-gray-400">{stat.label}</p>
+                  <h3 className="text-4xl font-bold text-[#FF0000] bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent">{stat.number}</h3>
+                  <p className="text-white">{stat.label}</p>
                 </motion.div>
               ))}
             </motion.div>
-          </motion.div>
-        </motion.div>
 
+
+          </div>
+
+          {/* 3D Canvas */}
+          <div className="flex-1 h-[1000px] w-full relative mt-10">
+            <div className="absolute inset-0 from-primary/20 via-transparent to-transparent" />
+            <Canvas
+              camera={{ position: [3, 3, 1], fov: 80 }}
+              className="w-full h-full"
+            >
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[8, 6, 3]} intensity={1} />
+              <Suspense fallback={null}>
+                <GamingSetup />
+              </Suspense>
+            </Canvas>
+          </div>
+        </div>
       </div>
 
       {/* Features Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="py-32 relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-[#00FF00]/5" />
-        <div className="container mx-auto px-6 relative">
-          <motion.div
-            variants={itemVariants}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl font-bold mb-6">Why Choose Hash Gaming?</h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Experience gaming like never before with our state-of-the-art facilities and premium services.
-            </p>
-          </motion.div>
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                icon: <MonitorPlay className="w-12 h-12" />,
-                title: "Premium Setups",
-                description: "4K displays, premium gaming chairs, and high-end peripherals for the ultimate gaming experience."
-              },
-              {
-                icon: <Clock className="w-12 h-12" />,
-                title: "Flexible Booking",
-                description: "Book by the hour, day, or get a monthly membership. Gaming on your schedule."
-              },
-              {
-                icon: <Trophy className="w-12 h-12" />,
-                title: "Regular Tournaments",
-                description: "Weekly tournaments with cash prizes. Compete with the best in your favorite games."
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="group p-8 rounded-2xl backdrop-blur-sm transition-all bg-gradient-to-br from-white/10 to-transparent border border-[#00FF00]/20 hover:border-[#00FF00]/40 hover:shadow-[0_0_30px_rgba(0,255,0,0.1)]"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="text-[#00FF00] mb-6"
-                >
-                  {feature.icon}
-                </motion.div>
-                <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-gray-400">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
+      <div className="py-20 bg-black relative">
+      <div className="absolute inset-0 from-secondary/20 via-dark to-dark" />
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          variants={itemVariants}
+          className="text-center mb-20"
+        >
+          <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent">⚔️ Why Join the Waitlist?⚔️</h2>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            Power Comes to Those Who Wait.
+          </p>
+        </motion.div>
 
-      {/* Console Section */}
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={containerVariants}
-        className="py-32 relative"
-      >
-        <div className="container mx-auto px-6">
-          <motion.h2
-            variants={itemVariants}
-            className="text-5xl font-bold mb-20 text-center"
-          >
-            Available Consoles
-          </motion.h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                name: "PlayStation 5",
-                image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80",
-                price: "₹100/hour"
-              },
-              {
-                name: "Xbox Series X",
-                image: "https://images.unsplash.com/photo-1621259182978-fbf93132d53d?auto=format&fit=crop&q=80",
-                price: "₹100/hour"
-              },
-              {
-                name: "Nintendo Switch",
-                image: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&q=80",
-                price: "₹100/hour"
-              },
-              {
-                name: "Computer",
-                image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?q=80&w=2940?auto=format&fit=crop&q=80",
-                price: "₹100/hour"
-              }
-            ].map((console, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="group relative overflow-hidden rounded-2xl"
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent z-10" />
-                <motion.img 
-                  whileHover={{ scale: 1.1 }}
-                  src={console.image}
-                  alt={console.name}
-                  className="w-full h-[400px] object-cover transition-transform duration-500"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                  <h3 className="text-2xl font-bold mb-2">{console.name}</h3>
-                  <p className="text-[#00FF00] font-bold mb-4">{console.price}</p>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-full bg-[#00FF00] text-black font-bold py-3 rounded-full transition-all"
-                  >
-                    Available Soon
-                  </motion.button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {[
+            {
+              icon: <Gift className="w-12 h-12 text-primary mb-4" />,
+              title: "Early Access to the App",
+              description: "Be the first to book arenas and dominate leaderboards."
+            },
+            {
+              icon: <Gift className="w-12 h-12 text-primary mb-4" />,
+              title: "Exclusive HashDrop Rewards",
+              description: "Get limited-edition merch, coins, and tournament invites."
+            },
+            {
+              icon: <Crown className="w-12 h-12 text-primary mb-4" />,
+              title: "Founding Member Badge",
+              description: "Your tag will carry legacy. Forever."
+            },
+            {
+              icon: <MessageCircle className="w-12 h-12 text-primary mb-4" />,
+              title: "Private Discord Access",
+              description: "Strategize with top gamers and influencers before launch."
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              whileHover={{ y: -5 }}
+              className="p-6 rounded-xl bg-gradient-to-br from-dark to-primary/10 border border-primary/20 backdrop-blur-sm text-center"
+            >
+              <div className="flex justify-center text-3xl mb-3">{feature.icon}</div>
+              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+              <p className="text-gray-400">{feature.description}</p>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
+      </div>
+    </div>
+
+
+    <div className="py-20 bg-black relative">
+  <div className="absolute inset-0 from-secondary/20 via-dark to-dark" />
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.div
+      variants={itemVariants}
+      className="text-center mb-20"
+    >
+      <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent">🎮 What Is Hash? </h2>
+      <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+        Hash is not just an app.  
+        It’s your gaming command center.
+      </p>
+    </motion.div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {[
+        {
+          icon: <Gamepad className="w-12 h-12 text-primary mb-4" />,
+          title: "Book Next-Gen Consoles",
+          description: "Real-time bookings at your city’s top gaming cafes."
+        },
+        {
+          icon: <Trophy className="w-12 h-12 text-primary mb-4" />,
+          title: "Join Competitive Tournaments",
+          description: "Climb the ranks. Win real rewards. Build your legacy."
+        },
+        {
+          icon: <Users className="w-12 h-12 text-primary mb-4" />,
+          title: "Squad Up & Connect",
+          description: "Your crew. Your arena. Your rules."
+        },
+        {
+          icon: <Smartphone className="w-12 h-12 text-primary mb-4" />,
+          title: "All-in-One Gaming App",
+          description: "One tap. Full control of your gaming journey."
+        }
+      ].map((feature, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+          whileHover={{ y: -5 }}
+          className="p-6 rounded-xl bg-gradient-to-br from-dark to-primary/10 border border-primary/20 backdrop-blur-sm text-center"
+        >
+          <div className="flex justify-center text-3xl mb-3">{feature.icon}</div>
+          <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+          <p className="text-gray-400">{feature.description}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
+      <LocationOverlay
+                isOpen={isLocationOverlayOpen}
+                onClose={() => setIsLocationOverlayOpen(false)}
+              />
+      <PreRegistrationForm isOpen={isPreRegisterOpen} onClose={() => setIsPreRegisterOpen(false)} />
+
 
       {/* App Download Section */}
       <motion.div
@@ -361,7 +315,7 @@ function App() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="py-32 relative overflow-hidden bg-gradient-to-b from-black to-[#00FF00]/10"
+        className="py-32 relative overflow-hidden bg-gradient-to-b from-black to-[#FF0000]/10"
       >
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
@@ -369,20 +323,20 @@ function App() {
               variants={itemVariants}
               className="flex-1"
             >
-              <h2 className="text-5xl font-bold mb-6">Download Our App</h2>
+              <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent">Download Our App</h2>
               <p className="text-xl text-gray-300 mb-8">
                 Get instant access to gaming slots, exclusive deals, and manage your bookings on the go.
               </p>
               <div className="flex items-center gap-8 mb-8">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-[#00FF00]/20"
+                  className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-[#FF0000]/20"
                 >
                   <QRCodeSVG
                     value="https://hashforgamers.co.in/app"
                     size={150}
                     level="H"
-                    fgColor="#00FF00"
+                    fgColor="#FF0000"
                     bgColor="transparent"
                   />
                 </motion.div>
@@ -390,7 +344,7 @@ function App() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full bg-[#00FF00] text-black font-bold px-8 py-4 rounded-full flex items-center justify-center space-x-2"
+                    className="w-full bg-[#FF0000] text-black font-bold px-8 py-4 rounded-full flex items-center justify-center space-x-2"
                   >
                     <Download className="w-5 h-5" />
                     <span>Soon Avalaible for Android</span>
@@ -398,7 +352,7 @@ function App() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-full bg-white/10 backdrop-blur-md border border-[#00FF00]/20 font-bold px-8 py-4 rounded-full flex items-center justify-center space-x-2"
+                    className="w-full bg-white/10 backdrop-blur-md border border-[#FF0000]/20 font-bold px-8 py-4 rounded-full flex items-center justify-center space-x-2"
                   >
                     <Download className="w-5 h-5" />
                     <span>Soon Avalaible for iOS</span>
@@ -422,12 +376,12 @@ function App() {
                 className="relative z-10"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&q=80"
+                  src="/image/home.png"
                   alt="App Screenshot"
-                  className="rounded-3xl shadow-2xl shadow-[#00FF00]/20"
+                  className="w-full h-auto bg-transparent"
+                  style={{ boxShadow: 'none', borderRadius: 0 }}
                 />
               </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             </motion.div>
           </div>
         </div>

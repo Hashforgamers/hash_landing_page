@@ -75,7 +75,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="text"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -85,7 +85,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -95,7 +95,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -115,7 +115,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="text"
                 value={formData.city}
                 onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -125,7 +125,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="text"
                 value={formData.preferredCafe}
                 onChange={(e) => setFormData({ ...formData, preferredCafe: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
               />
             </div>
           </div>
@@ -154,8 +154,8 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                     }}
                     className={`p-3 rounded-lg border ${
                       formData.gamingType.includes(type)
-                        ? 'border-[#00FF00] bg-[#00FF00]/20'
-                        : 'border-white/20 hover:border-[#00FF00]/50'
+                        ? 'border-[#FF0000] bg-[#FF0000]/20'
+                        : 'border-white/20 hover:border-[#FF0000]/50'
                     } transition-all text-sm text-center`}
                   >
                     {type}
@@ -179,8 +179,8 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                     }}
                     className={`p-3 rounded-lg border ${
                       formData.favoriteGames.includes(game)
-                        ? 'border-[#00FF00] bg-[#00FF00]/20'
-                        : 'border-white/20 hover:border-[#00FF00]/50'
+                        ? 'border-[#FF0000] bg-[#FF0000]/20'
+                        : 'border-white/20 hover:border-[#FF0000]/50'
                     } transition-all text-sm text-center`}
                   >
                     {game}
@@ -193,7 +193,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
               <select
                 value={formData.peakHours}
                 onChange={(e) => setFormData({ ...formData, peakHours: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
               >
                 <option value="">Select time</option>
                 <option value="morning">Morning (6 AM - 12 PM)</option>
@@ -207,7 +207,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
               <select
                 value={formData.groupSize}
                 onChange={(e) => setFormData({ ...formData, groupSize: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
               >
                 <option value="1">Solo Player</option>
                 <option value="2">2 Players</option>
@@ -234,7 +234,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="text"
                 value={formData.cafeName}
                 onChange={(e) => setFormData({ ...formData, cafeName: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -244,7 +244,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="text"
                 value={formData.ownerName}
                 onChange={(e) => setFormData({ ...formData, ownerName: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -254,7 +254,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="tel"
                 value={formData.cafePhone}
                 onChange={(e) => setFormData({ ...formData, cafePhone: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -264,7 +264,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="email"
                 value={formData.cafeEmail}
                 onChange={(e) => setFormData({ ...formData, cafeEmail: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
               />
             </div>
@@ -274,7 +274,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="text"
                 value={formData.cafeLocation}
                 onChange={(e) => setFormData({ ...formData, cafeLocation: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
                 placeholder="Full address"
               />
@@ -285,7 +285,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="url"
                 value={formData.googleMapsLink}
                 onChange={(e) => setFormData({ ...formData, googleMapsLink: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 placeholder="https://maps.google.com/..."
               />
             </div>
@@ -323,8 +323,8 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                     }}
                     className={`p-3 rounded-lg border ${
                       formData.gamingTypes.includes(type)
-                        ? 'border-[#00FF00] bg-[#00FF00]/20'
-                        : 'border-white/20 hover:border-[#00FF00]/50'
+                        ? 'border-[#FF0000] bg-[#FF0000]/20'
+                        : 'border-white/20 hover:border-[#FF0000]/50'
                     } transition-all text-sm text-center`}
                   >
                     {type}
@@ -338,7 +338,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 type="number"
                 value={formData.totalStations}
                 onChange={(e) => setFormData({ ...formData, totalStations: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                 required
                 min="1"
               />
@@ -349,7 +349,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="checkbox"
                   checked={formData.hasHighSpeedInternet}
                   onChange={(e) => setFormData({ ...formData, hasHighSpeedInternet: e.target.checked })}
-                  className="form-checkbox h-5 w-5 text-[#00FF00] rounded border-[#00FF00]/20"
+                  className="form-checkbox h-5 w-5 text-[#FF0000] rounded border-[#FF0000]/20"
                 />
                 <span className="text-sm font-medium">High-Speed Internet Available</span>
               </label>
@@ -371,7 +371,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="number"
                   value={formData.pcGamingRate}
                   onChange={(e) => setFormData({ ...formData, pcGamingRate: e.target.value })}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                   placeholder="₹"
                 />
               </div>
@@ -381,7 +381,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="number"
                   value={formData.ps5Rate}
                   onChange={(e) => setFormData({ ...formData, ps5Rate: e.target.value })}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                   placeholder="₹"
                 />
               </div>
@@ -391,7 +391,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="number"
                   value={formData.xboxRate}
                   onChange={(e) => setFormData({ ...formData, xboxRate: e.target.value })}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                   placeholder="₹"
                 />
               </div>
@@ -401,7 +401,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="number"
                   value={formData.vrRate}
                   onChange={(e) => setFormData({ ...formData, vrRate: e.target.value })}
-                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#00FF00]/20 focus:border-[#00FF00] focus:ring-1 focus:ring-[#00FF00] transition-all"
+                  className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
                   placeholder="₹"
                 />
               </div>
@@ -431,8 +431,8 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                     }}
                     className={`p-3 rounded-lg border ${
                       formData.additionalServices.includes(service)
-                        ? 'border-[#00FF00] bg-[#00FF00]/20'
-                        : 'border-white/20 hover:border-[#00FF00]/50'
+                        ? 'border-[#FF0000] bg-[#FF0000]/20'
+                        : 'border-white/20 hover:border-[#FF0000]/50'
                     } transition-all text-sm text-center`}
                   >
                     {service}
@@ -447,7 +447,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="checkbox"
                   checked={formData.hasMemberships}
                   onChange={(e) => setFormData({ ...formData, hasMemberships: e.target.checked })}
-                  className="form-checkbox h-5 w-5 text-[#00FF00] rounded border-[#00FF00]/20"
+                  className="form-checkbox h-5 w-5 text-[#FF0000] rounded border-[#FF0000]/20"
                 />
                 <span className="text-sm font-medium">Membership Plans Available</span>
               </label>
@@ -457,7 +457,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="checkbox"
                   checked={formData.hasDiscounts}
                   onChange={(e) => setFormData({ ...formData, hasDiscounts: e.target.checked })}
-                  className="form-checkbox h-5 w-5 text-[#00FF00] rounded border-[#00FF00]/20"
+                  className="form-checkbox h-5 w-5 text-[#FF0000] rounded border-[#FF0000]/20"
                 />
                 <span className="text-sm font-medium">Peak Hour Discounts Available</span>
               </label>
@@ -478,7 +478,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="checkbox"
                   checked={formData.willingToPartner}
                   onChange={(e) => setFormData({ ...formData, willingToPartner: e.target.checked })}
-                  className="form-checkbox h-5 w-5 text-[#00FF00] rounded border-[#00FF00]/20"
+                  className="form-checkbox h-5 w-5 text-[#FF0000] rounded border-[#FF0000]/20"
                 />
                 <span className="text-sm font-medium">Interested in Platform Partnership</span>
               </label>
@@ -488,7 +488,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   type="checkbox"
                   checked={formData.willingToDiscount}
                   onChange={(e) => setFormData({ ...formData, willingToDiscount: e.target.checked })}
-                  className="form-checkbox h-5 w-5 text-[#00FF00] rounded border-[#00FF00]/20"
+                  className="form-checkbox h-5 w-5 text-[#FF0000] rounded border-[#FF0000]/20"
                 />
                 <span className="text-sm font-medium">Willing to Offer Early Registration Discounts</span>
               </label>
@@ -510,16 +510,16 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 />
                 <label
                   htmlFor="cafe-images"
-                  className="flex items-center justify-center w-full p-4 border-2 border-dashed border-[#00FF00]/20 rounded-lg cursor-pointer hover:border-[#00FF00]/40 transition-all"
+                  className="flex items-center justify-center w-full p-4 border-2 border-dashed border-[#FF0000]/20 rounded-lg cursor-pointer hover:border-[#FF0000]/40 transition-all"
                 >
                   <div className="text-center">
-                    <Upload className="w-8 h-8 mx-auto mb-2 text-[#00FF00]" />
+                    <Upload className="w-8 h-8 mx-auto mb-2 text-[#FF0000]" />
                     <p className="text-sm font-medium">Click to upload café images</p>
                     <p className="text-xs text-gray-400 mt-1">Gaming setup, interior, etc.</p>
                   </div>
                 </label>
                 {formData.cafeImages.length > 0 && (
-                  <p className="text-sm text-[#00FF00]">
+                  <p className="text-sm text-[#FF0000]">
                     {formData.cafeImages.length} image(s) selected
                   </p>
                 )}
@@ -545,12 +545,12 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
         >
           <motion.div
             variants={modalVariants}
-            className="bg-black/90 border border-[#00FF00]/20 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            className="bg-black/90 border border-[#FF0000]/20 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
           >
-            <div className="p-6 border-b border-[#00FF00]/20">
+            <div className="p-6 border-b border-[#FF0000]/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <Gift className="w-6 h-6 text-[#00FF00]" />
+                  <Gift className="w-6 h-6 text-[#FF0000]" />
                   <h2 className="text-xl font-bold">Pre-registration</h2>
                 </div>
                 <motion.button
@@ -573,8 +573,8 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   }}
                   className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-all ${
                     isPlayerForm
-                      ? 'bg-[#00FF00] text-black'
-                      : 'border border-[#00FF00]/20 hover:border-[#00FF00]'
+                      ? 'bg-[#FF0000] text-black'
+                      : 'border border-[#FF0000]/20 hover:border-[#FF0000]'
                   }`}
                 >
                   Player Registration
@@ -588,8 +588,8 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   }}
                   className={`flex-1 py-2 px-4 rounded-full text-sm font-medium transition-all ${
                     !isPlayerForm
-                      ? 'bg-[#00FF00] text-black'
-                      : 'border border-[#00FF00]/20 hover:border-[#00FF00]'
+                      ? 'bg-[#FF0000] text-black'
+                      : 'border border-[#FF0000]/20 hover:border-[#FF0000]'
                   }`}
                 >
                   Café Registration
@@ -607,11 +607,11 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                       whileHover={{ scale: 1.05 }}
                       onClick={() => setStep(index + 1)}
                       className={`flex items-center space-x-2 ${
-                        step === index + 1 ? 'text-[#00FF00]' : 'text-gray-400'
+                        step === index + 1 ? 'text-[#FF0000]' : 'text-gray-400'
                       }`}
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${
-                        step === index + 1 ? 'border-[#00FF00] bg-[#00FF00]/20' : 'border-gray-600'
+                        step === index + 1 ? 'border-[#FF0000] bg-[#FF0000]/20' : 'border-gray-600'
                       }`}>
                         {s.icon}
                       </div>
@@ -629,14 +629,14 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 </motion.div>
               </div>
 
-              <div className="p-6 border-t border-[#00FF00]/20 flex justify-between">
+              <div className="p-6 border-t border-[#FF0000]/20 flex justify-between">
                 {step > 1 && (
                   <motion.button
                     type="button"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setStep(step - 1)}
-                    className="px-6 py-2 rounded-full border border-[#00FF00]/20 hover:border-[#00FF00] transition-all"
+                    className="px-6 py-2 rounded-full border border-[#FF0000]/20 hover:border-[#FF0000] transition-all"
                   >
                     Previous
                   </motion.button>
@@ -646,7 +646,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => step < currentSteps.length && setStep(step + 1)}
-                  className="px-6 py-2 rounded-full bg-[#00FF00] text-black font-semibold ml-auto"
+                  className="px-6 py-2 rounded-full bg-[#FF0000] text-black font-semibold ml-auto"
                 >
                   {step === currentSteps.length ? 'Submit' : 'Next'}
                 </motion.button>

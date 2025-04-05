@@ -18,7 +18,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-[#00FF00] rounded-full hover:bg-[#00CC00] transition-colors;
+  @apply bg-[#FF0000] rounded-full hover:bg-[#00CC00] transition-colors;
 }
 
 /* Smooth Scrolling */
