@@ -94,14 +94,17 @@ function App() {
             </motion.h1>
             
             <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             variants={itemVariants}
             className="flex items-center space-x-2 mb-4"
-          >
-            <span className="flex items-center gap-2  text-white mb-8 px-2 py-1 rounded-full text-sm font-bold animate-pulse border border-[#DE3A3A]/20 px-8 py-3 rounded-full transition-all shadow-[0_0_30px_rgba(255,0,0,0.5)]">
-              <span className="w-3 h-3 rounded-full border-2 border-[#DE3A3A]" />
-              Live Soon
-            </span>
-          </motion.div>
+            >
+              <span className="flex items-center gap-2  text-white mb-8 px-2 py-1 rounded-full text-sm font-bold animate-pulse border border-[#DE3A3A]/20 px-8 py-3 rounded-full transition-all shadow-[0_0_30px_rgba(255,0,0,0.5)]">
+                <span className="w-3 h-3 rounded-full border-2 border-[#DE3A3A]" />
+                Live Soon
+              </span>
+            </motion.div>
           
             <motion.p
               initial={{ opacity: 0, y: 20 }}
