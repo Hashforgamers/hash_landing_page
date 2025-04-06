@@ -9,6 +9,8 @@ import PreRegistrationForm from './components/PreRegistrationForm';
 import  {GamingSetup}  from './components/GamingSetup'
 import { Logo } from './components/Logo';
 import { Canvas } from '@react-three/fiber';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
