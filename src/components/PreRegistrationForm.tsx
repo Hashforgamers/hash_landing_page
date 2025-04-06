@@ -36,11 +36,11 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
     gamingTypes: [],
     totalStations: '',
     hasHighSpeedInternet: false,
-    pcGamingRate: '',
-    ps5Rate: '',
-    xboxRate: '',
-    vrRate: '',
-    mobileRate: '',
+    pcGamingRate: '0',
+    ps5Rate: '0',
+    xboxRate: '0',
+    vrRate: '0',
+    mobileRate: '0',
     peakHoursDetails: '',
     hasDiscounts: false,
     hasMemberships: false,
@@ -353,10 +353,10 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
     
       case 3: // Pricing & Services
         return (
-          Number(formData.pcGamingRate) > 0 &&
-          Number(formData.ps5Rate) > 0 &&
-          Number(formData.xboxRate) > 0 &&
-          Number(formData.vrRate) > 0 &&
+          Number(formData.pcGamingRate) >= 0 &&
+          Number(formData.ps5Rate) >= 0 &&
+          Number(formData.xboxRate) >= 0 &&
+          Number(formData.vrRate) >= 0 &&
           (formData.hasDiscounts !== undefined) &&
           (formData.hasMemberships !== undefined)
         );
