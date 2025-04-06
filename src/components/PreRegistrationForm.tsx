@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Gift, Users, Clock, Gamepad, Store, MapPin, Wifi, Coffee, Upload, DollarSign } from 'lucide-react';
+import { supabase } from './supabaseClient' // adjust the path as needed
+
 
 interface PreRegistrationFormProps {
   isOpen: boolean;
@@ -11,6 +13,7 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
   const [step, setStep] = useState(1);
   const [isPlayerForm, setIsPlayerForm] = useState(true);
   const [formData, setFormData] = useState({
+
     // Player form data
     fullName: '',
     phone: '',
@@ -46,10 +49,72 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
     cafeImages: [] as File[]
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    onClose();
+
+    try {
+      if (isPlayerForm) {
+        const groupSize = formData.groupSize === '5+' ? 5 : parseInt(formData.groupSize.split('-')[0], 10);
+
+        const playerPayload = {
+          full_name: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          city: formData.city,
+          preferred_cafe: formData.preferredCafe || null,
+          gaming_type: formData.gamingType.length ? formData.gamingType : null,
+          favorite_games: formData.favoriteGames.length ? formData.favoriteGames : null,
+          peak_hours: formData.peakHours ? [formData.peakHours] : null,
+          group_size: groupSize
+        };
+
+        const { error } = await supabase.from('player_registrations').insert([playerPayload]);
+
+        if (error) {
+          console.error('Error inserting player data:', error);
+          return;
+        }
+
+        console.log('✅ Player registration submitted successfully');
+      } else {
+        const cafePayload = {
+          cafe_name: formData.cafeName,
+          owner_name: formData.ownerName,
+          cafe_phone: formData.cafePhone,
+          cafe_email: formData.cafeEmail,
+          location: formData.cafeLocation,
+          google_maps_link: formData.googleMapsLink,
+          gaming_types: formData.gamingTypes.length ? formData.gamingTypes : null,
+          total_stations: formData.totalStations ? parseInt(formData.totalStations, 10) : null,
+          has_high_speed_internet: formData.hasHighSpeedInternet,
+          pc_gaming_rate: formData.pcGamingRate || null,
+          ps5_rate: formData.ps5Rate || null,
+          xbox_rate: formData.xboxRate || null,
+          vr_rate: formData.vrRate || null,
+          mobile_rate: formData.mobileRate || null,
+          peak_hours_details: formData.peakHoursDetails || null,
+          has_discounts: formData.hasDiscounts,
+          has_memberships: formData.hasMemberships,
+          additional_services: formData.additionalServices.length ? formData.additionalServices : null,
+          willing_to_partner: formData.willingToPartner,
+          willing_to_discount: formData.willingToDiscount,
+          cafe_images: formData.cafeImages.map(file => file.name) // Placeholder for now
+        };
+
+        const { error } = await supabase.from('cafe_registrations').insert([cafePayload]);
+
+        if (error) {
+          console.error('Error inserting café data:', error);
+          return;
+        }
+
+        console.log('✅ Café registration submitted successfully');
+      }
+
+      onClose();
+    } catch (err) {
+      console.error('❌ Unexpected error in form submission:', err);
+    }
   };
 
   const overlayVariants = {
@@ -137,89 +202,175 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
       icon: <Gamepad className="w-6 h-6" />,
       fields: (
         <>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium mb-3">Gaming Type</label>
-              <div className="grid grid-cols-2 gap-3">
-                {['PC Gaming', 'Console (PS5/Xbox)', 'VR Gaming', 'Mobile Esports'].map((type) => (
-                  <motion.button
-                    key={type}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      const types = formData.gamingType.includes(type)
-                        ? formData.gamingType.filter(t => t !== type)
-                        : [...formData.gamingType, type];
-                      setFormData({ ...formData, gamingType: types });
-                    }}
-                    className={`p-3 rounded-lg border ${
-                      formData.gamingType.includes(type)
-                        ? 'border-[#FF0000] bg-[#FF0000]/20'
-                        : 'border-white/20 hover:border-[#FF0000]/50'
-                    } transition-all text-sm text-center`}
-                  >
-                    {type}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-3">Favorite Games</label>
-              <div className="grid grid-cols-2 gap-3">
-                {['Valorant', 'CS2', 'FIFA', 'GTA V', 'Call of Duty', 'Fortnite', 'PUBG', 'Other'].map((game) => (
-                  <motion.button
-                    key={game}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      const games = formData.favoriteGames.includes(game)
-                        ? formData.favoriteGames.filter(g => g !== game)
-                        : [...formData.favoriteGames, game];
-                      setFormData({ ...formData, favoriteGames: games });
-                    }}
-                    className={`p-3 rounded-lg border ${
-                      formData.favoriteGames.includes(game)
-                        ? 'border-[#FF0000] bg-[#FF0000]/20'
-                        : 'border-white/20 hover:border-[#FF0000]/50'
-                    } transition-all text-sm text-center`}
-                  >
-                    {game}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-3">Peak Gaming Hours</label>
-              <select
-                value={formData.peakHours}
-                onChange={(e) => setFormData({ ...formData, peakHours: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
-              >
-                <option value="">Select time</option>
-                <option value="morning">Morning (6 AM - 12 PM)</option>
-                <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-                <option value="evening">Evening (5 PM - 10 PM)</option>
-                <option value="night">Late Night (10 PM - 6 AM)</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-3">Group Size</label>
-              <select
-                value={formData.groupSize}
-                onChange={(e) => setFormData({ ...formData, groupSize: e.target.value })}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
-              >
-                <option value="1">Solo Player</option>
-                <option value="2">2 Players</option>
-                <option value="3-4">3-4 Players</option>
-                <option value="5+">5+ Players</option>
-              </select>
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium mb-3">Gaming Type</label>
+            <div className="grid grid-cols-2 gap-3">
+              {['PC Gaming', 'Console (PS5/Xbox)', 'VR Gaming', 'Mobile Esports'].map((type) => (
+                <motion.button
+                  key={type}
+                  type="button" // Ensure it's a button, not a submit button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={(e) => {
+                    // Prevent form submission behavior
+                    e.preventDefault(); 
+
+                    const types = formData.gamingType.includes(type)
+                      ? formData.gamingType.filter(t => t !== type)
+                      : [...formData.gamingType, type];
+                    setFormData({ ...formData, gamingType: types });
+                  }}
+                  className={`p-3 rounded-lg border ${
+                    formData.gamingType.includes(type)
+                      ? 'border-[#FF0000] bg-[#FF0000]/20'
+                      : 'border-white/20 hover:border-[#FF0000]/50'
+                  } transition-all text-sm text-center`}
+                >
+                  {type}
+                </motion.button>
+              ))}
             </div>
           </div>
+          <div>
+            <label className="block text-sm font-medium mb-3">Favorite Games</label>
+            <div className="grid grid-cols-2 gap-3">
+              {['Valorant', 'CS2', 'FIFA', 'GTA V', 'Call of Duty', 'Fortnite', 'PUBG', 'Other'].map((game) => (
+                <motion.button
+                  key={game}
+                  type="button" // Ensure it's a button, not a submit button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={(e) => {
+                    // Prevent form submission behavior
+                    e.preventDefault(); 
+
+                    const games = formData.favoriteGames.includes(game)
+                      ? formData.favoriteGames.filter(g => g !== game)
+                      : [...formData.favoriteGames, game];
+                    setFormData({ ...formData, favoriteGames: games });
+                  }}
+                  className={`p-3 rounded-lg border ${
+                    formData.favoriteGames.includes(game)
+                      ? 'border-[#FF0000] bg-[#FF0000]/20'
+                      : 'border-white/20 hover:border-[#FF0000]/50'
+                  } transition-all text-sm text-center`}
+                >
+                  {game}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-3">Peak Gaming Hours</label>
+            <select
+              value={formData.peakHours}
+              onChange={(e) => setFormData({ ...formData, peakHours: e.target.value })}
+              className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
+            >
+              <option value="">Select time</option>
+              <option value="morning">Morning (6 AM - 12 PM)</option>
+              <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+              <option value="evening">Evening (5 PM - 10 PM)</option>
+              <option value="night">Late Night (10 PM - 6 AM)</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-3">Group Size</label>
+            <select
+              value={formData.groupSize}
+              onChange={(e) => setFormData({ ...formData, groupSize: e.target.value })}
+              className="w-full px-4 py-2 rounded-lg bg-white/10 border border-[#FF0000]/20 focus:border-[#FF0000] focus:ring-1 focus:ring-[#FF0000] transition-all"
+            >
+              <option value="1">Solo Player</option>
+              <option value="2">2 Players</option>
+              <option value="3-4">3-4 Players</option>
+              <option value="5+">5+ Players</option>
+            </select>
+          </div>
+        </div>
         </>
       )
     }
   ];
+
+  const isValidEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  
+  const isValidPhone = (phone: string) =>
+    /^[6-9]\d{9}$/.test(phone); // Indian 10-digit mobile starting 6-9  
+
+  const validatePlayerStep = () => {
+    console.log("I am at step",step)
+    switch (step) {
+      case 1: // Personal Information
+        return (
+          formData.fullName?.trim() &&
+          isValidEmail(formData.email) &&
+          isValidPhone(formData.phone)
+        );
+  
+      case 2: // city 
+        return (
+          formData.city?.trim()
+        );
+  
+      case 3: // Account Setup
+      {
+        console.log('gamingType:', formData.gamingType);
+        console.log('favoriteGames:', formData.favoriteGames);
+        console.log('peakHours:', formData.peakHours);
+      
+        return (
+          formData.gamingType && formData.gamingType.length > 0 &&
+          formData.favoriteGames && formData.favoriteGames.length > 0 &&
+          formData.peakHours && formData.peakHours.trim() !== ''
+        );
+      }
+      default:
+        return true;
+    }
+  };
+  
+  const validateCafeStep = () => {
+    switch (step) {
+      case 1: // Café Details
+        return (
+          formData.cafeName?.trim() &&
+          formData.ownerName?.trim() &&
+          formData.cafeLocation?.trim() &&
+          isValidEmail(formData.cafeEmail) &&
+          isValidPhone(formData.cafePhone)
+        );
+    
+      case 2: // Gaming Setup
+        return (
+          formData.gamingTypes?.length > 0 &&
+          formData.totalStations > 0 &&
+          formData.hasHighSpeedInternet !== undefined
+        );
+    
+      case 3: // Pricing & Services
+        return (
+          Number(formData.pcGamingRate) > 0 &&
+          Number(formData.ps5Rate) > 0 &&
+          Number(formData.xboxRate) > 0 &&
+          Number(formData.vrRate) > 0 &&
+          (formData.hasDiscounts !== undefined) &&
+          (formData.hasMemberships !== undefined)
+        );
+    
+      case 4: // Partnership
+        return (
+          formData.willingToPartner === true ||
+          formData.willingToDiscount === true
+        );
+    
+      default:
+        return true;
+    }
+  };
+  
 
   const cafeFormSteps = [
     {
@@ -642,14 +793,26 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                   </motion.button>
                 )}
                 <motion.button
-                  type={step === currentSteps.length ? 'submit' : 'button'}
+                  type={step === currentSteps.length && (isPlayerForm ? validatePlayerStep() : validateCafeStep()) ? 'submit' : 'button'}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => step < currentSteps.length && setStep(step + 1)}
+                  onClick={() => {
+                    const isValidStep = isPlayerForm ? validatePlayerStep() : validateCafeStep(); // Define isValidStep here
+
+                    if (!isValidStep) {
+                      console.error('Please complete this step before proceeding');
+                      return; // Stop the flow if validation fails
+                    }
+
+                    if (step < currentSteps.length) {
+                      setStep(step + 1);
+                    }
+                  }}
                   className="px-6 py-2 rounded-full bg-[#FF0000] text-black font-semibold ml-auto"
                 >
                   {step === currentSteps.length ? 'Submit' : 'Next'}
                 </motion.button>
+
               </div>
             </form>
           </motion.div>
