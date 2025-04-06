@@ -11,6 +11,7 @@ interface PreRegistrationFormProps {
 
 const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(1);
+  const [formError, setFormError] = useState('');
   const [isPlayerForm, setIsPlayerForm] = useState(true);
   const [formData, setFormData] = useState({
 
@@ -778,6 +779,10 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                 >
                   {currentSteps[step - 1].fields}
                 </motion.div>
+
+                {formError && (
+                  <div className="mt-4 text-red-500 text-sm">{formError}</div> // Display error message
+                )}
               </div>
 
               <div className="p-6 border-t border-[#FF0000]/20 flex justify-between">
@@ -800,8 +805,11 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
                     const isValidStep = isPlayerForm ? validatePlayerStep() : validateCafeStep(); // Define isValidStep here
 
                     if (!isValidStep) {
+                      setFormError('Please fill all required fields'); // Show error message if validation fails
                       console.error('Please complete this step before proceeding');
                       return; // Stop the flow if validation fails
+                    } else {
+                      setFormError(''); // Clear error if validation passes
                     }
 
                     if (step < currentSteps.length) {
