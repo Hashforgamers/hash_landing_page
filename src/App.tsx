@@ -336,7 +336,7 @@ function App() {
                   className="p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-[#FF0000]/20"
                 >
                   <QRCodeSVG
-                    value="https://hashforgamers.co.in/app"
+                    value="https://hashforgamers.co.in/"
                     size={150}
                     level="H"
                     fgColor="#FF0000"
@@ -418,6 +418,28 @@ function App() {
           </motion.div>
         </div>
       </motion.div>
+      {/* Footer */}
+      <footer className="bg-black border-t border-white/10 py-8 mt-20">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400 space-y-4 md:space-y-0">
+          <div className="flex items-center space-x-4">
+            <a href="/terms" className="hover:text-white transition-colors duration-200">
+              Terms & Conditions
+            </a>
+            <span className="mx-2">|</span>
+            <a href="/privacy" className="hover:text-white transition-colors duration-200">
+              Privacy Policy
+            </a>
+            <span className="mx-2">|</span>
+            <a href="/contact" className="hover:text-white transition-colors duration-200">
+              Contact
+            </a>
+          </div>
+          <div className="text-center md:text-right">
+            &copy; {new Date().getFullYear()} Hash For Gamers Pvt. Ltd. All rights reserved.
+          </div>
+        </div>
+      </footer>
+
     </div>
   );
 }

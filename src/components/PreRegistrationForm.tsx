@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Gift, Users, Clock, Gamepad, Store, MapPin, Wifi, Coffee, Upload, DollarSign } from 'lucide-react';
 import { supabase } from './supabaseClient' // adjust the path as needed
-
+import emailjs from "emailjs-com";
 
 interface PreRegistrationFormProps {
   isOpen: boolean;
@@ -50,73 +50,101 @@ const PreRegistrationForm: React.FC<PreRegistrationFormProps> = ({ isOpen, onClo
     cafeImages: [] as File[]
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      if (isPlayerForm) {
-        const groupSize = formData.groupSize === '5+' ? 5 : parseInt(formData.groupSize.split('-')[0], 10);
+  try {
+    let insertError = null;
+    let groupSize = null;
 
-        const playerPayload = {
-          full_name: formData.fullName,
-          phone: formData.phone,
-          email: formData.email,
-          city: formData.city,
-          preferred_cafe: formData.preferredCafe || null,
-          gaming_type: formData.gamingType.length ? formData.gamingType : null,
-          favorite_games: formData.favoriteGames.length ? formData.favoriteGames : null,
-          peak_hours: formData.peakHours ? [formData.peakHours] : null,
-          group_size: groupSize
-        };
+    if (isPlayerForm) {
+      groupSize = formData.groupSize === '5+' ? 5 : parseInt(formData.groupSize.split('-')[0], 10);
 
-        const { error } = await supabase.from('player_registrations').insert([playerPayload]);
+      const playerPayload = {
+        full_name: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        city: formData.city,
+        preferred_cafe: formData.preferredCafe || null,
+        gaming_type: formData.gamingType.length ? formData.gamingType : null,
+        favorite_games: formData.favoriteGames.length ? formData.favoriteGames : null,
+        peak_hours: formData.peakHours ? [formData.peakHours] : null,
+        group_size: groupSize
+      };
 
-        if (error) {
-          console.error('Error inserting player data:', error);
-          return;
-        }
+      const { error } = await supabase.from('player_registrations').insert([playerPayload]);
+      insertError = error;
 
-        console.log('✅ Player registration submitted successfully');
-      } else {
-        const cafePayload = {
-          cafe_name: formData.cafeName,
-          owner_name: formData.ownerName,
-          cafe_phone: formData.cafePhone,
-          cafe_email: formData.cafeEmail,
-          location: formData.cafeLocation,
-          google_maps_link: formData.googleMapsLink,
-          gaming_types: formData.gamingTypes.length ? formData.gamingTypes : null,
-          total_stations: formData.totalStations ? parseInt(formData.totalStations, 10) : null,
-          has_high_speed_internet: formData.hasHighSpeedInternet,
-          pc_gaming_rate: formData.pcGamingRate || null,
-          ps5_rate: formData.ps5Rate || null,
-          xbox_rate: formData.xboxRate || null,
-          vr_rate: formData.vrRate || null,
-          mobile_rate: formData.mobileRate || null,
-          peak_hours_details: formData.peakHoursDetails || null,
-          has_discounts: formData.hasDiscounts,
-          has_memberships: formData.hasMemberships,
-          additional_services: formData.additionalServices.length ? formData.additionalServices : null,
-          willing_to_partner: formData.willingToPartner,
-          willing_to_discount: formData.willingToDiscount,
-          cafe_images: formData.cafeImages.map(file => file.name) // Placeholder for now
-        };
-
-        const { error } = await supabase.from('cafe_registrations').insert([cafePayload]);
-
-        if (error) {
-          console.error('Error inserting café data:', error);
-          return;
-        }
-
-        console.log('✅ Café registration submitted successfully');
+      if (error) {
+        console.error('Error inserting player data:', error);
+        return;
       }
 
-      onClose();
-    } catch (err) {
-      console.error('❌ Unexpected error in form submission:', err);
+      console.log('✅ Player registration submitted successfully');
+    } else {
+      const cafePayload = {
+        cafe_name: formData.cafeName,
+        owner_name: formData.ownerName,
+        cafe_phone: formData.cafePhone,
+        cafe_email: formData.cafeEmail,
+        location: formData.cafeLocation,
+        google_maps_link: formData.googleMapsLink,
+        gaming_types: formData.gamingTypes.length ? formData.gamingTypes : null,
+        total_stations: formData.totalStations ? parseInt(formData.totalStations, 10) : null,
+        has_high_speed_internet: formData.hasHighSpeedInternet,
+        pc_gaming_rate: formData.pcGamingRate || null,
+        ps5_rate: formData.ps5Rate || null,
+        xbox_rate: formData.xboxRate || null,
+        vr_rate: formData.vrRate || null,
+        mobile_rate: formData.mobileRate || null,
+        peak_hours_details: formData.peakHoursDetails || null,
+        has_discounts: formData.hasDiscounts,
+        has_memberships: formData.hasMemberships,
+        additional_services: formData.additionalServices.length ? formData.additionalServices : null,
+        willing_to_partner: formData.willingToPartner,
+        willing_to_discount: formData.willingToDiscount,
+        cafe_images: formData.cafeImages.map(file => file.name)
+      };
+
+      const { error } = await supabase.from('cafe_registrations').insert([cafePayload]);
+      insertError = error;
+
+      if (error) {
+        console.error('Error inserting café data:', error);
+        return;
+      }
+
+      console.log('✅ Café registration submitted successfully');
     }
-  };
+
+    if (!insertError) {
+      const safeStr = (val: any) => (val == null ? "N/A" : String(val));
+
+    const templateParams = isPlayerForm
+      ? {
+          name: safeStr(formData.fullName),
+          email: safeStr(formData.email),
+        }
+      : {
+          name: safeStr(formData.cafeName),
+          email: safeStr(formData.cafeEmail),
+        };
+
+      await emailjs.send(
+        'service_oqp55sh',
+        'template_eegfj9b',
+        templateParams,
+        'oDRkZOrqmtQ1TpZHE'
+      );
+      console.log('Acknowledgment email sent!');
+    }
+
+    onClose();
+  } catch (err) {
+    console.error('❌ Unexpected error in form submission:', err);
+  }
+};
+
 
   const overlayVariants = {
     hidden: { opacity: 0 },
