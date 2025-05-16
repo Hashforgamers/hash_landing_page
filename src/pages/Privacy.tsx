@@ -44,6 +44,21 @@ const Privacy: React.FC = () => {
       icon: <Lock className="w-6 h-6 text-primary" />,
       title: "Security",
       content: `We implement robust security measures to protect your personal data from unauthorized access, disclosure, loss or misuse through reasonable security practices and procedures.`
+    },
+    {
+      icon: <FileText className="w-6 h-6 text-primary" />,
+      title: "Platform Nature",
+      content: `Hashforgamers is not a gaming service provider. We operate as a booking platform for game tickets, helping users discover and book tickets for available gaming slots at partner venues.`
+    },
+    {
+      icon: <FileText className="w-6 h-6 text-primary" />,
+      title: "Refund Policy",
+      content: `We do not provide any refund to our customers. Please read all policies carefully before booking.`
+    },
+    {
+      icon: <FileText className="w-6 h-6 text-primary" />,
+      title: "Pricing Information",
+      content: `All pricing details related to game ticket bookings are available on the website. Please refer to the respective game listing before booking.`
     }
   ];
 
@@ -109,6 +124,7 @@ const Privacy: React.FC = () => {
           className="bg-gradient-to-br from-gray-900/80 to-black p-8 rounded-2xl border border-primary/20 backdrop-blur-sm shadow-[0_0_30px_rgba(255,0,0,0.15)]"
         >
           <div className="prose prose-invert max-w-none">
+
             <h2 className="text-2xl font-bold text-white mb-6">Detailed Information</h2>
             
             {/* Full Privacy Policy Content */}
@@ -136,6 +152,27 @@ const Privacy: React.FC = () => {
               <p>
                 If you have any questions about our Privacy Policy or how we handle your data, please don't hesitate to contact our Data Protection Officer at privacy@hashforgamers.co.in
               </p>
+              
+              <h3 className="text-xl font-semibold text-white mt-8">Important Notice</h3>
+              <p>
+                As of yesterday, we have completed the KYC process and downloaded the updated policies in PDF format. These have now been incorporated into the website. Please review the Privacy Policy, Refund Policy, and Pricing Information accordingly.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8">Refund Policy</h3>
+              <p>
+                Please note that Hashforgamers does not provide any refunds for bookings made through our platform. All bookings are final. Make sure to review all details before confirming your purchase.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8">Nature of Our Services</h3>
+              <p>
+                We are not a gaming company. Hashforgamers acts solely as a booking platform that enables users to book game tickets across various gaming cafés and venues. All gaming services are managed by the respective partner cafés.
+              </p>
+
+              <h3 className="text-xl font-semibold text-white mt-8">Pricing Disclosure</h3>
+              <p>
+                Pricing for game tickets is displayed transparently on our platform. Please refer to the listing pages for the latest pricing before making a booking.
+              </p>
+
             </div>
           </div>
         </motion.div>
