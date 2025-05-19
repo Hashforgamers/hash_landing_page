@@ -126,7 +126,7 @@ const Contact: React.FC = () => {
                 </p>
                 <div className="flex items-center gap-2 text-primary font-semibold">
                   <Headphones className="w-5 h-5" />
-                  <span>Priority Line: +1 (888) GAME-911</span>
+                  <span>Priority Email Id: support@hashforgamers.co.in</span>
                 </div>
               </motion.div>
             </motion.div>
