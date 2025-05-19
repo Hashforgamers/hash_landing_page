@@ -327,6 +327,59 @@ function App() {
               />
       <PreRegistrationForm isOpen={isPreRegisterOpen} onClose={() => setIsPreRegisterOpen(false)} />
 
+{/* Pricing Section */}
+<motion.div
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={containerVariants}
+  className="py-24 bg-black relative"
+>
+  <div className="absolute inset-0 from-secondary/20 via-dark to-dark" />
+  <div className="container mx-auto px-6 relative z-10">
+    <motion.div
+      variants={itemVariants}
+      className="text-center mb-20"
+    >
+      <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent">
+        💸 Transparent, Café-Based Pricing
+      </h2>
+      <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+        We believe in fair play — pricing is set by each gaming café, so you pay exactly what’s listed. No hidden fees.
+      </p>
+    </motion.div>
+
+    <motion.div
+      variants={containerVariants}
+      className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center"
+    >
+      {[
+        {
+          title: "Console Hourly Rate",
+          price: "₹100 – ₹300/hr",
+          description: "Rates may vary based on location, console type, and café offerings."
+        },
+        {
+          title: "Membership Deals",
+          price: "Custom Café Packages",
+          description: "Unlock discounts, perks, and exclusive access directly from your chosen café."
+        }
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          variants={itemVariants}
+          whileHover={{ scale: 1.02 }}
+          className="bg-gradient-to-br from-gray-900/80 to-black p-8 rounded-2xl border border-primary/20 backdrop-blur-sm shadow-[0_0_30px_rgba(255,0,0,0.15)]"
+        >
+          <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+          <p className="text-3xl font-bold text-[#FF0000] mb-2">{item.price}</p>
+          <p className="text-gray-300">{item.description}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</motion.div>
+
 
       {/* App Download Section */}
       <motion.div

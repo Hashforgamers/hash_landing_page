@@ -28,39 +28,40 @@ const Privacy: React.FC = () => {
     {
       icon: <Shield className="w-6 h-6 text-primary" />,
       title: "Introduction",
-      content: `This Privacy Policy describes how Hashforgamers Pvt Ltd and its affiliates collect, use, share, protect or otherwise process your information through our website. We do not offer any product/service under this Platform outside India and your personal data will primarily be stored and processed in India.`
+      content: `This Privacy Policy describes how Hashforgamers Pvt Ltd and its affiliates (collectively "Hashforgamers Pvt Ltd", "we", "our", "us") collect, use, share, protect or otherwise process your information through our website https://hashforgamers.co.in/. Please note, we do not offer any product/service under this Platform outside India and your personal data will primarily be stored and processed in India.`
     },
     {
       icon: <Eye className="w-6 h-6 text-primary" />,
       title: "Collection",
-      content: `We collect your personal data when you use our Platform, services or otherwise interact with us. This includes name, date of birth, address, contact information, and payment details when necessary.`
+      content: `We collect personal data when you use our Platform, services, or otherwise interact with us. This includes, but is not limited to, name, date of birth, address, contact information, identity proof, and payment details as applicable.`
     },
     {
       icon: <FileText className="w-6 h-6 text-primary" />,
       title: "Usage",
-      content: `We use personal data to provide services, enhance customer experience, resolve disputes, detect fraud, and improve our offerings. Your data helps us customize your experience and keep you informed about relevant updates.`
+      content: `We use personal data to provide services, improve user experience, resolve disputes, detect fraud, and enhance platform offerings. Customization and relevant communication are part of this usage.`
     },
     {
       icon: <Lock className="w-6 h-6 text-primary" />,
       title: "Security",
-      content: `We implement robust security measures to protect your personal data from unauthorized access, disclosure, loss or misuse through reasonable security practices and procedures.`
+      content: `Reasonable security practices are in place to protect your personal data from unauthorized access, disclosure, or misuse in compliance with applicable law.`
     },
     {
       icon: <FileText className="w-6 h-6 text-primary" />,
       title: "Platform Nature",
-      content: `Hashforgamers is not a gaming service provider. We operate as a booking platform for game tickets, helping users discover and book tickets for available gaming slots at partner venues.`
+      content: `Hashforgamers is not a gaming service provider. We facilitate booking of game tickets at partner gaming venues through our platform.`
     },
     {
       icon: <FileText className="w-6 h-6 text-primary" />,
       title: "Refund Policy",
-      content: `We do not provide any refund to our customers. Please read all policies carefully before booking.`
+      content: `All bookings made on our platform are final. We do not provide any refunds. Please read all policies thoroughly before confirming your booking.`
     },
     {
       icon: <FileText className="w-6 h-6 text-primary" />,
       title: "Pricing Information",
-      content: `All pricing details related to game ticket bookings are available on the website. Please refer to the respective game listing before booking.`
+      content: `Pricing details for all gaming ticket bookings are transparently provided on the respective game listings on our website.`
     }
   ];
+
 
   return (
     <section className="relative min-h-screen bg-black py-20">
