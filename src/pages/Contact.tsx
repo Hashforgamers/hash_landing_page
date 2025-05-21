@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ContactForm from './ContactForm';
-import { ShieldCheck, Mail, Headphones } from 'lucide-react';
+import { ShieldCheck, Mail, Headphones, Phone, MapPin } from 'lucide-react';
 
 const contactFeatures = [
   {
@@ -115,7 +115,8 @@ const Contact: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
-              
+
+              {/* Emergency Support */}
               <motion.div 
                 variants={itemVariants}
                 className="mt-10 p-6 rounded-xl bg-primary/10 border border-primary/20"
@@ -124,9 +125,19 @@ const Contact: React.FC = () => {
                 <p className="text-gray-300 mb-4">
                   Technical issues during gameplay? Our rapid response team is available 24/7.
                 </p>
-                <div className="flex items-center gap-2 text-primary font-semibold">
-                  <Headphones className="w-5 h-5" />
-                  <span>Priority Email Id: support@hashforgamers.co.in / hashforgamers@gmail.com</span>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center gap-2 text-primary font-semibold">
+                    <Headphones className="w-5 h-5" />
+                    <span>support@hashforgamers.co.in / hashforgamers@gmail.com</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-primary font-semibold">
+                    <Phone className="w-5 h-5" />
+                    <span>+91 9137757935</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-primary font-semibold">
+                    <MapPin className="w-5 h-5" />
+                    <span>Asmita Garden, Mira Road, Mumbai</span>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
