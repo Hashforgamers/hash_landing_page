@@ -110,9 +110,10 @@ function App() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className={fixed w-full z-40 transition-all duration-300 ${
-            scrolled ? 'backdrop-blur-md border-b border-primary/20' : 'bg-transparent'
-        }}
+        className={`fixed w-full z-40 transition-all duration-300 ${
+  scrolled ? 'backdrop-blur-md border-b border-primary/20' : 'bg-transparent'
+}`}
+
       >
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Logo />
