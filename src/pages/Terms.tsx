@@ -63,22 +63,7 @@ const Terms: React.FC = () => {
         policy and such other policies of such third party websites. These links are provided for your
         convenience for provide further information..
         You understand that upon initiating a transaction for availing the Services you are entering
-        into a legally binding and enforceable contract with the Platform Owner for the Services..
-        7.
-        2.
-        3.
-        4.
-        5.
-        6.
-        7.
-        8.
-        9.
-        10.
-        10.
-        11.
-        12.
-        13.
-        14.
+        into a legally binding and enforceable contract with the Platform Owner for the Services.
         You shall indemnify and hold harmless Platform Owner, its affiliates, group companies (as
         applicable) and their respective officers, directors, agents, and employees, from any claim or
         demand, or actions including reasonable attorney's fees, made by any third party or penalty
