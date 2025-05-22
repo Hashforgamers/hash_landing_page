@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Gamepad2, Rocket, Cog, BarChart } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,24 +24,20 @@ const itemVariants = {
 
 const features = [
   {
-    icon: <Gamepad2 className="w-8 h-8 text-primary" />,
     title: "Instant Booking",
-    description: "No waiting. No calling. Just book and play. Get instant access to your favorite gaming stations."
+    description: "Skip the hassle—no need for calls or coordination. Reserve your station instantly and stay focused on what matters."
   },
   {
-    icon: <Rocket className="w-8 h-8 text-primary" />,
-    title: "Real-Time Availability",
-    description: "See what's available at your favorite cafés, in real-time. No more guessing or wasted trips."
+    title: "Live Availability",
+    description: "Check real-time status of spaces nearby. Avoid wait times and plan your sessions with confidence."
   },
   {
-    icon: <Cog className="w-8 h-8 text-primary" />,
-    title: "For Café Partners",
-    description: "Powerful backend tools to manage bookings, slots, and capacity efficiently. Take control of your business."
+    title: "Partner Dashboard",
+    description: "Enable seamless management of bookings, slots, and schedules. Designed to streamline operations and empower hosts."
   },
   {
-    icon: <BarChart className="w-8 h-8 text-primary" />,
-    title: "Scalable Platform",
-    description: "Built for growth—whether you're a single café or a chain. Our platform grows with your ambitions."
+    title: "Built to Scale",
+    description: "Whether starting small or expanding locations, our platform adapts to your growth and simplifies your operations."
   }
 ];
 
@@ -71,13 +66,13 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-accent"
           >
-            Why Hash?
+            Why Choose Us?
           </motion.h1>
           <motion.p 
             variants={itemVariants}
             className="text-xl text-gray-300 max-w-2xl mx-auto"
           >
-            Revolutionizing the Gaming Café Experience
+            Rethinking how digital hubs and entertainment zones operate.
           </motion.p>
         </motion.div>
 
@@ -93,12 +88,7 @@ const About: React.FC = () => {
               whileHover={{ scale: 1.02 }}
               className="bg-gradient-to-br from-gray-900/80 to-black p-8 rounded-2xl border border-primary/20 backdrop-blur-sm shadow-[0_0_30px_rgba(255,0,0,0.15)]"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 rounded-lg bg-gray-800 flex items-center justify-center">
-                  {feature.icon}
-                </div>
-                <h2 className="text-2xl font-bold text-white">{feature.title}</h2>
-              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">{feature.title}</h2>
               <p className="text-gray-300">{feature.description}</p>
             </motion.div>
           ))}
@@ -113,27 +103,27 @@ const About: React.FC = () => {
             <h2 className="text-2xl font-bold text-white mb-6">Our Mission</h2>
             <div className="space-y-6 text-gray-300">
               <p>
-                At Hash For Gamers, we're on a mission to transform how gamers access and experience gaming cafés. 
-                We believe that every gamer deserves seamless access to high-quality gaming stations without the 
-                hassle of traditional booking systems.
+                We're here to redefine how people engage with high-end recreational and tech-enabled spaces. 
+                With simplified access, our goal is to eliminate barriers and provide users with reliable tools 
+                for seamless experiences.
               </p>
               <p>
-                Our platform bridges the gap between passionate gamers and premium gaming facilities, creating 
-                a ecosystem that benefits both players and café owners. We're not just a booking platform; 
-                we're building the future of gaming café management.
+                The platform is crafted to align users and space owners through intelligent scheduling, 
+                transparent operations, and real-time interaction. Whether you're managing one location or many, 
+                our tools make it easier to focus on what you do best.
               </p>
               <p>
-                Whether you're a casual gamer looking for a quick session or a professional team needing 
-                practice space, Hash For Gamers is your gateway to hassle-free gaming experiences.
+                For individuals, we offer a clear path to discover, book, and enjoy top-tier setups. 
+                For partners, we deliver robust systems to grow and manage their business digitally.
               </p>
             </div>
 
             {/* Stats Section */}
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { number: "1+", label: "Partner Cafés" },
-                { number: "10+", label: "Active Users" },
-                { number: "99.9%", label: "Uptime" }
+                { number: "1+", label: "Partner Locations" },
+                { number: "10+", label: "Verified Users" },
+                { number: "99.9%", label: "System Uptime" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
